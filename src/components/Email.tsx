@@ -25,24 +25,32 @@ export const EmailComponent = (props: Iprop) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(submit)} noValidate>
-        <div className="form-field">
-          <label htmlFor="email">Email*</label>
-          <input
-            type="text"
-            id="email"
-            {...register("email", {
-              required: "email is requried",
-              validate: {
-                isEmail: (val) =>
-                  validator.isEmail(val) ? true : "invalid email format",
-              },
-            })}
-          />
-          {errors.email && <small>{errors.email.message}</small>}
+      <form onSubmit={handleSubmit(submit)} className="row g-3" noValidate>
+        <div className="col-md-6">
+          <div className="form-floating">
+            <label htmlFor="email">Your Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Your Email"
+              {...register("email", {
+                required: "email is requried",
+                validate: {
+                  isEmail: (val) =>
+                    validator.isEmail(val) ? true : "invalid email format",
+                },
+              })}
+            />
+            {errors.email && (
+              <small className="text-danger">{errors.email.message}</small>
+            )}
+          </div>
         </div>
-        <div className="form-submit">
-          <input type="submit" value="Next" />
+        <div className="col-12">
+          <button className="btn btn-primary py-3 px-5" type="submit">
+            Next
+          </button>
         </div>
       </form>
     </>
