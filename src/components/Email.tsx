@@ -25,32 +25,34 @@ export const EmailComponent = (props: Iprop) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(submit)} className="row g-3" noValidate>
-        <div className="col-md-6">
-          <div className="form-floating">
-            <label htmlFor="email">Your Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Your Email"
-              {...register("email", {
-                required: "email is requried",
-                validate: {
-                  isEmail: (val) =>
-                    validator.isEmail(val) ? true : "invalid email format",
-                },
-              })}
-            />
-            {errors.email && (
-              <small className="text-danger">{errors.email.message}</small>
-            )}
+      <form onSubmit={handleSubmit(submit)} noValidate>
+        <div className="row g-3">
+          <div className="col-md-12">
+            <div className="form-floating">
+              <input
+                type="email"
+                id="email"
+                className="form-control"
+                placeholder="Your Email"
+                {...register("email", {
+                  required: "email is requried",
+                  validate: {
+                    isEmail: (val) =>
+                      validator.isEmail(val) ? true : "invalid email format",
+                  },
+                })}
+              />
+              {errors.email && (
+                <small className="text-danger">{errors.email.message}</small>
+              )}
+              <label htmlFor="email">Your Email</label>
+            </div>
           </div>
-        </div>
-        <div className="col-12">
-          <button className="btn btn-primary py-3 px-5" type="submit">
-            Next
-          </button>
+          <div className="col-12 d-flex justify-content-center">
+            <button className="btn btn-primary py-3 px-5" type="submit">
+              Next
+            </button>
+          </div>
         </div>
       </form>
     </>

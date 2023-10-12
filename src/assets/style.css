@@ -1,0 +1,20 @@
+.success-con {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 60px;
+  flex-direction: column;
+}
+.success-con i {
+  border: 1px solid green;
+  border-radius: 50%;
+  font-size: 40px;
+  background: green;
+  color: white;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+.success-con p {
+  font-size: 20px;
+  font-weight: bold;
+}

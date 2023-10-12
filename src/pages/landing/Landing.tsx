@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { MapComponent } from "../../components/Map";
 
 export const Landing = () => {
   return (

@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EmailComponent } from "../../components/Email";
 import { ValidationCodeComponent } from "../../components/VaidationCode";
 import { PersonalDetailsComponents } from "../../components/PersonalDetail";
 import { DocsComponent } from "../../components/Docs";
 import bg from "../../assets/bg.jpg";
+import { MapComponent } from "../../components/Map";
+import { StepsBarComponent } from "../../components/step-bar/StepsBar";
+import "../../assets/style.css";
 
 export const Register = () => {
   interface Idata {
@@ -27,6 +30,10 @@ export const Register = () => {
   }
   const [steps, setSteps] = useState(0);
   const [data, setData] = useState<Partial<Idata>>();
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  }>({ latitude: 30.048723157849253, longitude: 31.23486207349697 });
 
   return (
     <>
@@ -41,12 +48,17 @@ export const Register = () => {
             <div
               className="col-lg-5 col-md-6 wow fadeInUp"
               data-wow-delay="0.1s"
+              // style={{ maxHeight: "600px" }}
             >
-              <img
-                src={bg}
-                alt="img"
-                style={{ overflow: "hidden", height: "100%", width: "100%" }}
-              />
+              {steps === 2 ? (
+                <MapComponent setLocation={setLocation} />
+              ) : (
+                <img
+                  src={bg}
+                  alt="img"
+                  style={{ overflow: "hidden", height: "100%", width: "100%" }}
+                />
+              )}
             </div>
             <div
               className="col-lg-7 col-md-6 wow fadeInUp"
@@ -58,6 +70,7 @@ export const Register = () => {
                 and paste the files, add a little code and you're done.{" "}
                 <a href="https://momies.net">Download App</a>.
               </p>{" "}
+              <StepsBarComponent steps={steps} />
               <div className="registeration">
                 {steps === 0 && (
                   <EmailComponent
@@ -75,6 +88,7 @@ export const Register = () => {
                     setSteps={setSteps}
                     data={data}
                     setData={setData}
+                    location={location}
                   />
                 )}
                 {steps === 3 && (
@@ -86,9 +100,12 @@ export const Register = () => {
                   />
                 )}
                 {steps === 4 && (
-                  <>
-                    <h1>Registered success</h1>
-                  </>
+                  <div className="success-con">
+                    <i className="fa-solid fa-check"></i>
+                    <p>
+                      Please wait until our customer services check your data
+                    </p>
+                  </div>
                 )}
               </div>{" "}
             </div>

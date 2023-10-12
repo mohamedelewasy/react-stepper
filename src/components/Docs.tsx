@@ -11,8 +11,7 @@ export const DocsComponent = (props: Iprop) => {
   interface Iform {
     logo: File[];
     coverPage: File[];
-    commercialRegistrationNumber: File[];
-    taxRegistrationNumber: File[];
+    verificationDocuments: File[];
   }
 
   const {
@@ -29,113 +28,106 @@ export const DocsComponent = (props: Iprop) => {
   return (
     <>
       <form onSubmit={handleSubmit(submit)} noValidate>
-        <div className="form-control">
-          <label htmlFor="logo">Logo*</label>
-          <input
-            type="file"
-            id="logo"
-            {...register("logo", {
-              required: "logo is requried",
-              validate: {
-                countImages: (val: File[]) =>
-                  val.length > 1 ? "images count exeeded" : true,
-                imageSize: (val: File[]) => {
-                  for (let i = 0; i < val.length; i++) {
-                    if (!val[i].type.startsWith("image/"))
-                      return `${val[i].name} must be an image`;
-                    if (val[i].size > 1024 * 1024 * 1.7)
-                      return `${val[i].name} must be at most 1.7MB`;
-                  }
-                  return true;
+        <div className="row g-3">
+          <div className="col-md-12">
+            <label htmlFor="logo" className="form-label">
+              Logo*
+            </label>
+            <input
+              type="file"
+              id="logo"
+              className="form-control"
+              style={{ backgroundColor: "#fff" }}
+              {...register("logo", {
+                required: "logo is requried",
+                validate: {
+                  countImages: (val: File[]) =>
+                    val.length > 1 ? "images count exeeded" : true,
+                  imageSize: (val: File[]) => {
+                    for (let i = 0; i < val.length; i++) {
+                      if (!val[i].type.startsWith("image/"))
+                        return `${val[i].name} must be an image`;
+                      if (val[i].size > 1024 * 1024 * 5)
+                        return `${val[i].name} must be at most 5MB`;
+                    }
+                    return true;
+                  },
                 },
-              },
-            })}
-          />
-          {errors.logo && <small>{errors.logo.message}</small>}
-        </div>
-        <div className="form-control">
-          <label htmlFor="coverPage">Cover Page*</label>
-          <input
-            type="file"
-            id="coverPage"
-            {...register("coverPage", {
-              required: "coverPage is requried",
-              validate: {
-                countImages: (val: File[]) =>
-                  val.length > 1 ? "images count exeeded" : true,
-                imageSize: (val: File[]) => {
-                  for (let i = 0; i < val.length; i++) {
-                    if (!val[i].type.startsWith("image/"))
-                      return `${val[i].name} must be an image`;
-                    if (val[i].size > 1024 * 1024 * 1.7)
-                      return `${val[i].name} must be at most 1.7MB`;
-                  }
-                  return true;
+              })}
+            />
+            {errors.logo && (
+              <small className="text-danger">{errors.logo.message}</small>
+            )}
+          </div>
+          <div className="col-md-12">
+            <label htmlFor="coverPage" className="form-label">
+              Cover Page*
+            </label>
+            <input
+              type="file"
+              id="coverPage"
+              className="form-control"
+              style={{ backgroundColor: "#fff" }}
+              {...register("coverPage", {
+                required: "coverPage is requried",
+                validate: {
+                  countImages: (val: File[]) =>
+                    val.length > 1 ? "images count exeeded" : true,
+                  imageSize: (val: File[]) => {
+                    for (let i = 0; i < val.length; i++) {
+                      if (!val[i].type.startsWith("image/"))
+                        return `${val[i].name} must be an image`;
+                      if (val[i].size > 1024 * 1024 * 5)
+                        return `${val[i].name} must be at most 5MB`;
+                    }
+                    return true;
+                  },
                 },
-              },
-            })}
-          />
-          {errors.coverPage && <small>{errors.coverPage.message}</small>}
-        </div>
-        <div className="form-control">
-          <label htmlFor="commercialRegistrationNumber">
-            Commercial Registration Number*
-          </label>
-          <input
-            type="file"
-            id="commercialRegistrationNumber"
-            multiple
-            {...register("commercialRegistrationNumber", {
-              required: "commercial registration number is requried",
-              validate: {
-                countImages: (val: File[]) =>
-                  val.length > 5 ? "images count exeeded" : true,
-                imageSize: (val: File[]) => {
-                  for (let i = 0; i < val.length; i++) {
-                    if (!val[i].type.startsWith("image/"))
-                      return `${val[i].name} must be an image`;
-                    if (val[i].size > 1024 * 1024 * 1.7)
-                      return `${val[i].name} must be at most 1.7MB`;
-                  }
-                  return true;
+              })}
+            />
+            {errors.coverPage && (
+              <small className="text-danger">{errors.coverPage.message}</small>
+            )}
+          </div>
+          <div className="col-md-12">
+            <label htmlFor="verificationDocuments" className="form-label">
+              Verification Documents*
+            </label>
+            <input
+              type="file"
+              id="verificationDocuments"
+              className="form-control"
+              style={{ backgroundColor: "#fff" }}
+              multiple
+              {...register("verificationDocuments", {
+                required: "verification documents are requried",
+                validate: {
+                  countImages: (val: File[]) =>
+                    val.length > 5 ? "images count exeeded" : true,
+                  imageSize: (val: File[]) => {
+                    for (let i = 0; i < val.length; i++) {
+                      if (!val[i].type.startsWith("image/"))
+                        return `${val[i].name} must be an image`;
+                      if (val[i].size > 1024 * 1024 * 5)
+                        return `${val[i].name} must be at most 5MB`;
+                    }
+                    return true;
+                  },
                 },
-              },
-            })}
-          />
-          {errors.commercialRegistrationNumber && (
-            <small>{errors.commercialRegistrationNumber.message}</small>
-          )}
+              })}
+            />
+            {errors.verificationDocuments && (
+              <small className="text-danger">
+                {errors.verificationDocuments.message}
+              </small>
+            )}
+          </div>
+          <div className="col-12 d-flex justify-content-center">
+            <button className="btn btn-primary py-3 px-5" type="submit">
+              Next
+            </button>
+          </div>
         </div>
-        <div className="form-control">
-          <label htmlFor="taxRegistrationNumber">
-            Tax Registration Number*
-          </label>
-          <input
-            type="file"
-            id="taxRegistrationNumber"
-            multiple
-            {...register("taxRegistrationNumber", {
-              required: "tax registration number is requried",
-              validate: {
-                countImages: (val: File[]) =>
-                  val.length > 5 ? "images count exeeded" : true,
-                imageSize: (val: File[]) => {
-                  for (let i = 0; i < val.length; i++) {
-                    if (!val[i].type.startsWith("image/"))
-                      return `${val[i].name} must be an image`;
-                    if (val[i].size > 1024 * 1024 * 1.7)
-                      return `${val[i].name} must be at most 1.7MB`;
-                  }
-                  return true;
-                },
-              },
-            })}
-          />
-          {errors.taxRegistrationNumber && (
-            <small>{errors.taxRegistrationNumber.message}</small>
-          )}
-        </div>
-        <input type="submit" value="Next" />
       </form>
     </>
   );

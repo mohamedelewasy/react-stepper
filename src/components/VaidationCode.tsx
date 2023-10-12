@@ -23,27 +23,41 @@ export const ValidationCodeComponent = (props: Iprop) => {
   return (
     <>
       <form onSubmit={handleSubmit(submit)} noValidate>
-        <p>Verification Code is Already sent to your email</p>
-        <label htmlFor="email">Verification Code*</label>
-        <input
-          type="text"
-          id="email"
-          {...register("verificationCode", {
-            required: "verification code is required",
-            minLength: {
-              value: 8,
-              message: "verification code must be 8 characters",
-            },
-            maxLength: {
-              value: 8,
-              message: "verification code must be 8 characters",
-            },
-          })}
-        />
-        {errors.verificationCode && (
-          <small>{errors.verificationCode.message}</small>
-        )}
-        <input type="submit" value="Next" disabled={!isValid} />
+        <div className="row g-3">
+          <div className="col-md-12">
+            <p>Verification Code is Already sent to your email</p>
+            <div className="form-floating">
+              <input
+                type="text"
+                id="verificationCode"
+                placeholder="Your Vrification Code"
+                className="form-control"
+                {...register("verificationCode", {
+                  required: "verification code is required",
+                  minLength: {
+                    value: 8,
+                    message: "verification code must be 8 characters",
+                  },
+                  maxLength: {
+                    value: 8,
+                    message: "verification code must be 8 characters",
+                  },
+                })}
+              />
+              {errors.verificationCode && (
+                <small className="text-danger">
+                  {errors.verificationCode.message}
+                </small>
+              )}
+              <label htmlFor="verificationCode">Verification Code*</label>
+            </div>
+          </div>
+          <div className="col-12 d-flex justify-content-center">
+            <button className="btn btn-primary py-3 px-5" type="submit">
+              Next
+            </button>
+          </div>
+        </div>
       </form>
     </>
   );
